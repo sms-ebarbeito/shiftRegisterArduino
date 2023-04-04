@@ -51,17 +51,24 @@ void loop() {
 void setData(bool d1, bool d2, bool finish) {
   if (d1) digitalWrite(DATA1, HIGH); else digitalWrite(DATA1, LOW);
   if (d2) digitalWrite(DATA2, HIGH); else digitalWrite(DATA2, LOW);
-  delay(10);
+  delay(50);
   digitalWrite(CLK, HIGH);
   delay(50);
   if (finish) {
     digitalWrite(DATA1, HIGH);
     digitalWrite(DATA2, HIGH);
-    delay(20);
+    delay(50);
     digitalWrite(CLK, LOW);
-  } 
-  digitalWrite(DATA1, LOW);
-  digitalWrite(DATA2, LOW);
+    delay(50);
+    digitalWrite(DATA1, LOW);
+    digitalWrite(DATA2, LOW);
+    
+  } else {
+    digitalWrite(DATA1, LOW);
+    digitalWrite(DATA2, LOW);
+    delay(50);
+    digitalWrite(CLK, LOW);
+  }
   delay(50);
-  digitalWrite(CLK, LOW);
+
 }
