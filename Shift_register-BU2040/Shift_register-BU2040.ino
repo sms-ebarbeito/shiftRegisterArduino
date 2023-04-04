@@ -108,37 +108,35 @@ void handleClk() {
 }
 
 void writeOutSlow() {
-  if (outputs[0] == HIGH) { digitalWrite(O00, HIGH); } else { digitalWrite(O00, LOW); }
-  if (outputs[1] == HIGH) { digitalWrite(O01, HIGH); } else { digitalWrite(O01, LOW); }
-  if (outputs[2] == HIGH) { digitalWrite(O02, HIGH); } else { digitalWrite(O02, LOW); }
-  if (outputs[3] == HIGH) { digitalWrite(O03, HIGH); } else { digitalWrite(O03, LOW); }
-  //PORTB
-  if (outputs[4] == HIGH) { digitalWrite(O04, HIGH); } else { digitalWrite(O04, LOW); }
-  if (outputs[5] == HIGH) { digitalWrite(O05, HIGH); } else { digitalWrite(O05, LOW); }
-  if (outputs[6] == HIGH) { digitalWrite(O06, HIGH); } else { digitalWrite(O06, LOW); }
-  if (outputs[7] == HIGH) { digitalWrite(O07, HIGH); } else { digitalWrite(O07, LOW); }
-  if (outputs[8] == HIGH) { digitalWrite(O08, HIGH); } else { digitalWrite(O08, LOW); }
-  if (outputs[9] == HIGH) { digitalWrite(O09, HIGH); } else { digitalWrite(O09, LOW); }
-  //PORTC --> PORTC is analog, maybe is slow, maybe is beter to use PORTD0, PORTD1
-  if (outputs[10] == HIGH) { digitalWrite(O10, HIGH); } else { digitalWrite(O10, LOW); }
-  if (outputs[11] == HIGH) { digitalWrite(O11, HIGH); } else { digitalWrite(O11, LOW); }
+  if (outputs[11] == HIGH) { digitalWrite(O00, HIGH); } else { digitalWrite(O00, LOW); }
+  if (outputs[10] == HIGH) { digitalWrite(O01, HIGH); } else { digitalWrite(O01, LOW); }
+  if (outputs[9] == HIGH) { digitalWrite(O02, HIGH); } else { digitalWrite(O02, LOW); }
+  if (outputs[8] == HIGH) { digitalWrite(O03, HIGH); } else { digitalWrite(O03, LOW); }
+  if (outputs[7] == HIGH) { digitalWrite(O04, HIGH); } else { digitalWrite(O04, LOW); }
+  if (outputs[6] == HIGH) { digitalWrite(O05, HIGH); } else { digitalWrite(O05, LOW); }
+  if (outputs[5] == HIGH) { digitalWrite(O06, HIGH); } else { digitalWrite(O06, LOW); }
+  if (outputs[4] == HIGH) { digitalWrite(O07, HIGH); } else { digitalWrite(O07, LOW); }
+  if (outputs[3] == HIGH) { digitalWrite(O08, HIGH); } else { digitalWrite(O08, LOW); }
+  if (outputs[2] == HIGH) { digitalWrite(O09, HIGH); } else { digitalWrite(O09, LOW); }
+  if (outputs[1] == HIGH) { digitalWrite(O10, HIGH); } else { digitalWrite(O10, LOW); }
+  if (outputs[0] == HIGH) { digitalWrite(O11, HIGH); } else { digitalWrite(O11, LOW); }
 }
 
 void writeOutFast() {
   //UGLY, BUT FASTER!
   //PORTD
-  if (outputs[0] == HIGH) { PORTD |= C11; } else { PORTD &= ~C11;}
-  if (outputs[1] == HIGH) { PORTD |= C10; } else { PORTD &= ~C10;}
-  if (outputs[2] == HIGH) { PORTD |= C09; } else { PORTD &= ~C09;}
-  if (outputs[3] == HIGH) { PORTD |= C08; } else { PORTD &= ~C08;}
+  if (outputs[11] == HIGH) { PORTD |= C11; } else { PORTD &= ~C11;}
+  if (outputs[10] == HIGH) { PORTD |= C10; } else { PORTD &= ~C10;}
+  if (outputs[9] == HIGH) { PORTD |= C09; } else { PORTD &= ~C09;}
+  if (outputs[8] == HIGH) { PORTD |= C08; } else { PORTD &= ~C08;}
   //PORTB
-  if (outputs[4] == HIGH) { PORTB |= C07; } else { PORTB &= ~C07;}
-  if (outputs[5] == HIGH) { PORTB |= C06; } else { PORTB &= ~C06;}
-  if (outputs[6] == HIGH) { PORTB |= C05; } else { PORTB &= ~C05;}
-  if (outputs[7] == HIGH) { PORTB |= C04; } else { PORTB &= ~C04;}
-  if (outputs[8] == HIGH) { PORTB |= C03; } else { PORTB &= ~C03;}
-  if (outputs[9] == HIGH) { PORTB |= C02; } else { PORTB &= ~C02;}
-  //PORTC --> PORTC is analog, maybe is slow, maybe is beter to use PORTD0, PORTD1
-  if (outputs[10] == HIGH) { PORTC |= C01; } else { PORTC &= ~C01;}
-  if (outputs[11] == HIGH) { PORTC |= C00; } else { PORTC &= ~C00;}
+  if (outputs[7] == HIGH) { PORTB |= C07; } else { PORTB &= ~C07;}
+  if (outputs[6] == HIGH) { PORTB |= C06; } else { PORTB &= ~C06;}
+  if (outputs[5] == HIGH) { PORTB |= C05; } else { PORTB &= ~C05;}
+  if (outputs[4] == HIGH) { PORTB |= C04; } else { PORTB &= ~C04;}
+  if (outputs[3] == HIGH) { PORTB |= C03; } else { PORTB &= ~C03;}
+  if (outputs[2] == HIGH) { PORTB |= C02; } else { PORTB &= ~C02;}
+  //PORTC
+  if (outputs[1] == HIGH) { PORTC |= C01; } else { PORTC &= ~C01;}
+  if (outputs[0] == HIGH) { PORTC |= C00; } else { PORTC &= ~C00;}
 }
