@@ -66,61 +66,49 @@ void setup() {
   pinMode(O10, OUTPUT);
   pinMode(O11, OUTPUT);
 
-  Serial.begin(115200);
-  Serial.println("DEBUG MODE");
-
-  attachInterrupt(digitalPinToInterrupt(3), handleClk, CHANGE);
+  attachInterrupt(INT1, handleClk, CHANGE);
 }
-/**
- * lastClk = 0
- * clk = 0
- * data = X
- */
 
 void loop() {
-//  byte data = PIND & (C_DATA);
-//  byte clk =  PIND & (C_CLK);
-//  if (~lastClk & clk & 0x1) { //Clock rise
-//    lastClk = ~lastClk;
-//    if (output < 12) outputs[output] = data;
-//    output++;
-//  } else 
-//  if (~lastClk & ~clk & data) {
-//    writeSerial(); //DEBUG
-//    writeOut();
-//    output = 0;
-//    lastClk = ~lastClk;
-//  }
-  
+  //Nothing to do! waiting for interrupt
 }
 
 void handleClk() {
-  byte data = PIND & (C_DATA);
   byte clk =  PIND & (C_CLK);
+  byte data = PIND & (C_DATA);
   if (clk) {
     //rise clk
-    if (output < 12) outputs[output] = data;
+    if (output < 12) {
+      if (data) outputs[output] = HIGH; else outputs[output] = LOW;
+    }
     output++;
   } else {
     //fall clk
-    writeSerial(); //DEBUG
-    writeOut();
-    output = 0;
+    if (data) {
+      writeOutFast();
+      output = 0;
+    }
   }
 }
 
-void writeSerial() {
-  Serial.println("TABLE");
-  for(int i = 0; i<12; i++){
-    Serial.print("Out");
-    Serial.print(i);
-    Serial.print(": ");
-    Serial.println(outputs[i]);
-  }
-  Serial.print("--------------------");
+void writeOutSlow() {
+  if (outputs[0] == HIGH) { digitalWrite(O00, HIGH); } else { digitalWrite(O00, LOW); }
+  if (outputs[1] == HIGH) { digitalWrite(O01, HIGH); } else { digitalWrite(O01, LOW); }
+  if (outputs[2] == HIGH) { digitalWrite(O02, HIGH); } else { digitalWrite(O02, LOW); }
+  if (outputs[3] == HIGH) { digitalWrite(O03, HIGH); } else { digitalWrite(O03, LOW); }
+  //PORTB
+  if (outputs[4] == HIGH) { digitalWrite(O04, HIGH); } else { digitalWrite(O04, LOW); }
+  if (outputs[5] == HIGH) { digitalWrite(O05, HIGH); } else { digitalWrite(O05, LOW); }
+  if (outputs[6] == HIGH) { digitalWrite(O06, HIGH); } else { digitalWrite(O06, LOW); }
+  if (outputs[7] == HIGH) { digitalWrite(O07, HIGH); } else { digitalWrite(O07, LOW); }
+  if (outputs[8] == HIGH) { digitalWrite(O08, HIGH); } else { digitalWrite(O08, LOW); }
+  if (outputs[9] == HIGH) { digitalWrite(O09, HIGH); } else { digitalWrite(O09, LOW); }
+  //PORTC --> PORTC is analog, maybe is slow, maybe is beter to use PORTD0, PORTD1
+  if (outputs[10] == HIGH) { digitalWrite(O10, HIGH); } else { digitalWrite(O10, LOW); }
+  if (outputs[11] == HIGH) { digitalWrite(O11, HIGH); } else { digitalWrite(O11, LOW); }
 }
 
-void writeOut() {
+void writeOutFast() {
   //UGLY, BUT FASTER!
   //PORTD
   if (outputs[0] == HIGH) { PORTD |= C11; } else { PORTD &= ~C11;}
@@ -135,6 +123,6 @@ void writeOut() {
   if (outputs[8] == HIGH) { PORTB |= C03; } else { PORTB &= ~C03;}
   if (outputs[9] == HIGH) { PORTB |= C02; } else { PORTB &= ~C02;}
   //PORTC --> PORTC is analog, maybe is slow, maybe is beter to use PORTD0, PORTD1
-  if (outputs[11] == HIGH) { PORTC |= C01; } else { PORTC &= ~C01;}
-  if (outputs[12] == HIGH) { PORTC |= C00; } else { PORTC &= ~C00;}
+  if (outputs[10] == HIGH) { PORTC |= C01; } else { PORTC &= ~C01;}
+  if (outputs[11] == HIGH) { PORTC |= C00; } else { PORTC &= ~C00;}
 }
