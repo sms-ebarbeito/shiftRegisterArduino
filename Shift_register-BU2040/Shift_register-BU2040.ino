@@ -5,6 +5,22 @@ TRYING TO REPLACE A BU2040F CHIP
 pulse has 20uS 
 
 USING INTERRUPTS
+
+BU2040F  ARDUINO
+DATA     PIN 2
+CLOCK    PIN 3
+Q0       PIN 4
+Q1       PIN 5
+Q2       PIN 6
+Q3       PIN 7
+Q4       PIN 8
+Q5       PIN 9
+Q6       PIN 10
+Q7       PIN 11
+Q8       PIN 12
+Q9       PIN 13
+Q10      PIN A0
+Q11      PIN A1
 **/
 
 //DEFINE PORTS
